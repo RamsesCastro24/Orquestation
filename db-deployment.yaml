@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+    spec:
+      containers:
+        - image: mysql:latest
+          name: basedatos
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value:  
+          ports:
+            - containerPort: 3306
+              name: mysql
+          volumeMounts:
+            - name: mysql-persistente
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-persistente
+          persistentVolumeClaim:
+            claimName: base-pv-claim

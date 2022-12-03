@@ -1,0 +1,21 @@
+apiVersion: app/v1
+kind: Deployment
+metadata:
+  name: api-reticula-pods
+  labels:
+    app: api-reticula-pods
+spec:
+  selector:
+    matchLabels:
+      app: api-reticula-pods
+  replicas: 7
+  template:
+    metadata:
+      labels:
+        app: api-reticula-pods
+    spec:
+      containers:
+        - name: api-reticula-pods
+          image: ramsescastro24/apireticula-php-apache-environment:v1
+          ports:
+            - containerPort: 80
